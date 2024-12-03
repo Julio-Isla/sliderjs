@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Image Slider</title>
+    <title>Responsive Slider</title>
   </head>
   <body>
-    <div class="slider">
-      <div class="slider-wrapper">
-        <img src="dos.jpg" alt="Image 1" />
-        <img src="uno.jpeg" alt="Image 2" />
-        <img src="tres.jpg" alt="Image 3" />
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slide"><img src="uno.jpeg" alt="Image 1" /></div>
+        <div class="slide"><img src="dos.jpg" alt="Image 2" /></div>
+        <div class="slide"><img src="tres.jpg" alt="Image 3" /></div>
       </div>
-      <button class="prev-btn">&lt;</button>
-      <button class="next-btn">&gt;</button>
+      <button class="nav prev">❮</button>
+      <button class="nav next">❯</button>
+      <div class="navigation-dots"></div>
     </div>
-
     <script src="main.js"></script>
   </body>
 </html>

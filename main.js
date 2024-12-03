@@ -1,39 +1,80 @@
-const sliderWrapper = document.querySelector(".slider-wrapper");
-const images = document.querySelectorAll(".slider-wrapper img");
-const prevBtn = document.querySelector(".prev-btn");
-const nextBtn = document.querySelector(".next-btn");
+const slider = document.querySelector(".slider");
+const slides = document.querySelectorAll(".slide");
+const prevButton = document.querySelector(".nav.prev");
+const nextButton = document.querySelector(".nav.next");
+const navigationDots = document.querySelector(".navigation-dots");
 
 let currentIndex = 0;
+let autoSlideInterval;
 
-// Function to update slider position
-function updateSlider() {
-  const offset = currentIndex * -100;
-  sliderWrapper.style.transform = `translateX(${offset}%)`;
+// Crear puntos de navegación
+function createDots() {
+  slides.forEach((_, index) => {
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    if (index === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => goToSlide(index));
+    navigationDots.appendChild(dot);
+  });
 }
 
-// Automatic sliding
-let autoSlide = setInterval(() => {
-  currentIndex = (currentIndex + 1) % images.length;
-  updateSlider();
-}, 3000);
+// Actualizar el punto activo
+function updateDots() {
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentIndex);
+  });
+}
 
-// Manual navigation
-prevBtn.addEventListener("click", () => {
-  clearInterval(autoSlide);
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  updateSlider();
-  autoSlide = setInterval(() => {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateSlider();
-  }, 3000);
+// Ir a una diapositiva específica
+function goToSlide(index) {
+  slider.style.transform = `translateX(-${index * 100}%)`;
+  currentIndex = index;
+  updateDots();
+}
+
+// Ir a la siguiente diapositiva
+function nextSlide() {
+  if (currentIndex === slides.length - 1) {
+    currentIndex = 0;
+  } else {
+    currentIndex++;
+  }
+  goToSlide(currentIndex);
+}
+
+// Ir a la diapositiva anterior
+function prevSlide() {
+  if (currentIndex === 0) {
+    currentIndex = slides.length - 1;
+  } else {
+    currentIndex--;
+  }
+  goToSlide(currentIndex);
+}
+
+// Configurar desplazamiento automático
+function startAutoSlide() {
+  autoSlideInterval = setInterval(nextSlide, 5000);
+}
+
+// Detener el desplazamiento automático
+function stopAutoSlide() {
+  clearInterval(autoSlideInterval);
+}
+
+// Eventos para los botones
+nextButton.addEventListener("click", () => {
+  nextSlide();
+  stopAutoSlide();
+  startAutoSlide();
 });
 
-nextBtn.addEventListener("click", () => {
-  clearInterval(autoSlide);
-  currentIndex = (currentIndex + 1) % images.length;
-  updateSlider();
-  autoSlide = setInterval(() => {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateSlider();
-  }, 3000);
+prevButton.addEventListener("click", () => {
+  prevSlide();
+  stopAutoSlide();
+  startAutoSlide();
 });
+
+// Iniciar automáticamente
+createDots();
+startAutoSlide();
