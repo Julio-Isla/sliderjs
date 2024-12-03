@@ -1,7 +1,7 @@
 const slider = document.querySelector(".slider");
 const slides = document.querySelectorAll(".slide");
-const prevButton = document.querySelector(".nav.prev");
-const nextButton = document.querySelector(".nav.next");
+const prevButton = document.querySelector(".btn.prev");
+const nextButton = document.querySelector(".btn.next");
 const navigationDots = document.querySelector(".navigation-dots");
 
 let currentIndex = 0;

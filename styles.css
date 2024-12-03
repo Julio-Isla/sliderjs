@@ -42,7 +42,7 @@ body {
 }
 
 /* Navigation Buttons */
-.nav {
+.btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -57,15 +57,15 @@ body {
   z-index: 1000;
 }
 
-.nav.prev {
+.btn.prev {
   left: 10px;
 }
 
-.nav.next {
+.btn.next {
   right: 10px;
 }
 
-.nav:hover {
+.btn:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
@@ -97,7 +97,7 @@ body {
     height: 400px;
   }
 
-  .nav {
+  .btn {
     font-size: 18px;
     padding: 5px;
   }
